@@ -14,7 +14,8 @@ app.get('/events', (req,res)=>{
     .then(data => {
     // Work with JSON data here
         //console.log(data.paid);
-        res.send(`<html>${prettysplit(data.paid)}</html>`);
+        
+        res.end(`<html>${prettysplit(data.paid)}</html>`);
     })
     .catch(err => {
     // Do something for an error here
