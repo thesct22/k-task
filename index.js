@@ -5,7 +5,8 @@ const {prettysplit,duplicate}=require('./getUsers');
 const dotenv= require("dotenv");
 dotenv.config();
 
-const url = process.env.EXT_URL;
+//const url = process.env.EXT_URL;
+const url="https://o136z8hk40.execute-api.us-east-1.amazonaws.com/dev/get-list-of-conferences";
 
 var app=express()
 
