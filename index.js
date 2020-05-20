@@ -1,5 +1,6 @@
 const express=require('express');
 const fetch = require('node-fetch');
+var path = require('path');
 const {prettysplit,duplicate}=require('./getUsers');
 const dotenv= require("dotenv");
 dotenv.config();
@@ -7,6 +8,10 @@ dotenv.config();
 const url = process.env.EXT_URL;
 
 var app=express()
+
+app.get('/',(req,res)=>{
+    res.sendFile(path.join(__dirname + '/index.html'));
+})
 
 app.get('/events/paid', (req,res)=>{   
      
