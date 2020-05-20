@@ -1,26 +1,32 @@
-l=[] //list to be avoided
-for(i=0;i<users.length;i++){
-    for(j=i+1;j<users;j++){
-        if(l.indexOf(users.conference_id[j])!=-1){ //skip if already in list to be avoided
-            break;
-        }
-        if(
-            (users[i].conference_id===users[j].conference_id)|| //if same conference id or
-            (user[i].confName==user[j].confName)|| //if same conference name or
-            (
-                (user[i].venue==user[j].venue)&& //if same venue and
+exports.avoider=(users)=>{
+    l=[] //list to be avoided
+    for(i=0;i<users.length;i++){
+        for(j=i+1;j<users.length;j++){
+            if(l.indexOf(users[j].conference_id)!=-1){ //skip if already in list to be avoided
+                continue;
+            }
+            if(users[i].conference_id==users[j].conference_id){//if same conference id or
+                l.push(users[i].conference_id);
+                l.push(users[j].conference_id);
+                continue;
+            }
+            if(users[i].confName==users[j].confName){ //if same conference name or
+                l.push(users[i].conference_id);
+                l.push(users[j].conference_id);
+                continue;
+            }
+            if((users[i].venue==users[j].venue)&& //if same venue and
+                (users[i].searchTerms==users[j].searchTerms)&& //if same search terms and
                 (
-                    (user[i].userid==user[j].userid)|| //if same userid or
-                    (user[i].searchTerms==user[j].searchTerms) //if same search terms
-                )&&//and
-                (
-                    (user[i].confStartDate==user[j].confStartDate)|| //if same start date or
-                    (user[i].confEndDate==user[j].confEndDate) //if same end date
+                    (users[i].confStartDate==users[j].confStartDate)|| //if same start date or
+                    (users[i].confEndDate==users[j].confEndDate) //if same end date
                 )
             )
-        ){
-            l.push(users.conference_id[j]); // add to list to be avoided
-            break;
-        }   
+            {
+                l.push(users[i].conference_id);
+                l.push(users[j].conference_id); // add to list to be avoided
+            }
+        }
     }
-}
+    return l;//returns the list with duplicates
+ }
